@@ -1,7 +1,7 @@
 class Solution:
     def reverse(self, x: int) -> int:
         ele_list = []
-        if x ==0:
+        if x == 0:
             return 0
         elif x < 0:
             tmp_x = -x
