@@ -14,7 +14,7 @@ class Solution:
         for idx, ltr in enumerate(s):
             if ltr in rec:
                 curr_len = idx - head
-                head = rec[ltr] + 1
+                head = rec[ltr] + 1 if rec[ltr] + 1 > head else head
                 if curr_len > max_len:
                     max_len = curr_len
 
