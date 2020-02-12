@@ -1,5 +1,38 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
+        """
+        dp solution
+        Args:
+            s:
+
+        Returns:
+
+        """
+        l = len(s)
+        memo = [[0 for i in range(l)] for i in range(l)]
+        max_l = 0
+        max_str = ''
+
+        for i in range(l):
+            for j in range(i+1):
+                if i - j <= 1 and s[i] == s[j]:
+                    memo[i][j] = True
+                    if i - j + 1 > max_l:
+                        max_l = i - j + 1
+                        max_str = s[j: i + 1]
+                else:
+                    if s[i] == s[j] and memo[i - 1][j + 1]:
+                        memo[i][j] = True
+                        if i - j + 1 > max_l:
+                            max_l = i - j + 1
+                            max_str = s[j: i + 1]
+                    else:
+                        memo[i][j] = False
+
+        return max_str
+
+
+    def longestPalindrome_bt(self, s: str) -> str:
         str_size = len(s)
         if str_size == 0:
             return ''
@@ -38,6 +71,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    test = "bb"
+    test = "cbbd"
     solu = Solution()
     print(solu.longestPalindrome(test))
