@@ -28,11 +28,7 @@ class Solution:
         if s_len != 0 and p_len == 0:
             return False
 
-        c_list = []
-        tmp_str = ''
-        for idx in range(s_len - 1):
-            if s[idx] != s[idx + 1]:
-                c_list.append()
+        memo = [[False for i in range(s_len) for i in range(p_len)]
 
 
 
