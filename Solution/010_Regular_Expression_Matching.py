@@ -19,26 +19,22 @@ class Solution:
         s_len = len(s)
         p_len = len(p)
 
-        if s_len == 0 and p_len == 0:
-            return True
+        memo = [[False for i in range(p_len + 1)] for i in range(s_len + 1)]
+        memo[-1][-1] = True
 
-        if s_len == 0 and p_len != 0:
-            return self.is_all_star(p)
+        for i in range(s_len, -1, -1):
+            for j in range(p_len - 1, -1, -1):
+                first_match = i < s_len and p[j] in [s[i], '.']
 
-        if s_len != 0 and p_len == 0:
-            return False
+                if j + 1 < p_len and p[j+1] == '*':
+                    memo[i][j] = memo[i][j + 2] or first_match and memo[i+1][j]
+                else:
+                    memo[i][j] = first_match and memo[i+1][j+1]
 
-        memo = [[False for i in range(s_len) for i in range(p_len)]
+        return memo[0][0]
 
+s = 'aa'
+p = 'a*'
 
-
-    @staticmethod
-    def is_all_star(my_str):
-        for c in my_str:
-            if c is '*':
-                continue
-            else:
-                return False
-
-        return True
-
+solu = Solution()
+print(solu.isMatch(s, p))
